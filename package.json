@@ -13,7 +13,7 @@
     "ios/Sources",
     "ios/Tests",
     "Package.swift",
-    "CapacitorCameraView.podspec"
+    "CardonautCameraView.podspec"
   ],
   "author": "Florian Leger (forked from Michael Wolz)",
   "license": "Apache-2.0",
@@ -36,7 +36,7 @@
   ],
   "scripts": {
     "verify": "npm run verify:ios && npm run verify:android && npm run verify:web",
-    "verify:ios": "xcodebuild -scheme CapacitorCameraView -destination generic/platform=iOS",
+    "verify:ios": "xcodebuild -scheme CardonautCameraView -destination generic/platform=iOS",
     "verify:android": "cd android && ./gradlew clean build test && cd ..",
     "verify:web": "npm run build",
     "lint": "npm run eslint",
