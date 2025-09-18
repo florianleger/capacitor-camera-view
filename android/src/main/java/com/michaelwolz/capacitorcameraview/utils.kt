@@ -95,33 +95,21 @@ fun sessionConfigFromPluginCall(call: PluginCall): CameraSessionConfiguration {
 /**
  * Calculates the image orientation based on the display rotation and sensor rotation degrees.
  *
- * This is because CameraController will set the image orientation based on the device's
- * motion sensor, which may not match the display rotation and in this case not what we actually
- * want.
+ * Note: This function now always returns 0 to disable automatic rotation based on device sensor.
+ * Photos will be captured in their original orientation without any rotation applied.
  *
  * @param displayRotation The current display rotation (0, 1, 2, or 3).
  * @param sensorRotationDegrees The rotation of the camera sensor in degrees (0, 90, 180, or 270).
  * @param isFrontFacing Whether the camera is front-facing or back-facing.
- * @return The calculated image orientation in degrees.
+ * @return Always returns 0 to disable rotation.
  */
 fun calculateImageRotationBasedOnDisplayRotation(
     displayRotation: Int,
     sensorRotationDegrees: Int,
     isFrontFacing: Boolean
 ): Int {
-    val surfaceRotationDegrees = when (displayRotation) {
-        Surface.ROTATION_0 -> 0
-        Surface.ROTATION_90 -> 90
-        Surface.ROTATION_180 -> 180
-        Surface.ROTATION_270 -> 270
-        else -> 0
-    }
-
-    return if (isFrontFacing) {
-        (sensorRotationDegrees + surfaceRotationDegrees) % 360
-    } else {
-        (sensorRotationDegrees - surfaceRotationDegrees + 360) % 360
-    }
+    // Always return 0 to disable automatic rotation based on sensor
+    return 0
 }
 
 /**
